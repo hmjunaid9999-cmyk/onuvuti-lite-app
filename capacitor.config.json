@@ -1,5 +1,11 @@
 {
   "appId": "com.onuvuti.lite",
   "appName": "Onuvuti Lite",
-  "webDir": "www"
+  "webDir": "www",
+  "plugins": {
+    "FirebaseAuthentication": {
+      "skipNativeAuth": true,
+      "providers": ["google.com"]
+    }
+  }
 }
