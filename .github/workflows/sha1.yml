@@ -1,0 +1,22 @@
+name: Get SHA1
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/sha1.yml'
+permissions:
+  contents: write
+jobs:
+  sha1:
+    runs-on: ubuntu-latest
+    env:
+      KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          keytool -list -v -keystore keystore.jks -storepass "$KEYSTORE_PASSWORD" | grep -E "SHA1|SHA256" > sha1.txt
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add sha1.txt
+          git commit -m "add sha1 [skip ci]"
+          git push
