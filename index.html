@@ -128,5 +128,15 @@ onAuthStateChanged(auth,u=>{curUser=u;if(u){g("gate").classList.remove("on");if(
 /* Google লগইন: অ্যাপের ভেতরে নেটিভ, ব্রাউজারে আগের মতো পপআপ */
 const googleLogin=async()=>{const cap=window.Capacitor;if(cap&&cap.isNativePlatform&&cap.isNativePlatform()){const FA=(cap.Plugins&&cap.Plugins.FirebaseAuthentication)||(cap.registerPlugin&&cap.registerPlugin("FirebaseAuthentication"));if(!FA)throw new Error("native-login-unavailable");const r=await FA.signInWithGoogle();const idt=r&&r.credential&&r.credential.idToken;if(!idt)throw new Error("no-id-token");return signInWithCredential(auth,GoogleAuthProvider.credential(idt))}return signInWithPopup(auth,new GoogleAuthProvider())};
 g("gbtn").onclick=()=>googleLogin().catch(e=>{g("gerr").textContent=e.code||e.message});
+/* অ্যান্ড্রয়েড ব্যাক বাটন: খোলা মেনু/পেজ থেকে আগের পেজে ফেরা; হোমে থাকলে অ্যাপ বন্ধ */
+(()=>{const cap=window.Capacitor;if(!(cap&&cap.isNativePlatform&&cap.isNativePlatform()))return;
+const A=(cap.Plugins&&cap.Plugins.App)||(cap.registerPlugin&&cap.registerPlugin("App"));
+if(!A||!A.addListener)return;
+A.addListener("backButton",()=>{
+if(document.querySelector(".full.on:not(#gate)")){history.back();return}
+const af=document.querySelector("#frames iframe.on"),w=af&&af.contentWindow;
+if(w&&w.__innerDepth&&w.__innerDepth()>0){history.back();return}
+if(typeof cur!=="undefined"&&cur&&cur.p!=="index"){history.back();return}
+if(A.exitApp)A.exitApp()})})();
 </script>
 </body></html>
