@@ -38,6 +38,23 @@ jobs:
         run: |
           sed -i 's#</manifest>#    <uses-permission android:name="android.permission.CAMERA" />\n    <uses-permission android:name="android.permission.RECORD_AUDIO" />\n    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />\n    <uses-feature android:name="android.hardware.camera" android:required="false" />\n    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false" />\n</manifest>#' android/app/src/main/AndroidManifest.xml
           cat android/app/src/main/AndroidManifest.xml
+      - name: App icon
+        run: |
+          sudo apt-get install -y -qq imagemagick || true
+          RES=android/app/src/main/res
+          for d in mdpi:48 hdpi:72 xhdpi:96 xxhdpi:144 xxxhdpi:192; do
+            n=${d%%:*}; s=${d##*:}
+            mkdir -p $RES/mipmap-$n
+            convert icon-512.png -resize ${s}x${s} $RES/mipmap-$n/ic_launcher.png
+            convert icon-512.png -resize ${s}x${s} $RES/mipmap-$n/ic_launcher_round.png
+          done
+          for d in mdpi:108 hdpi:162 xhdpi:216 xxhdpi:324 xxxhdpi:432; do
+            n=${d%%:*}; s=${d##*:}; inner=$((s*66/100))
+            convert icon-512.png -resize ${inner}x${inner} -background none -gravity center -extent ${s}x${s} $RES/mipmap-$n/ic_launcher_foreground.png
+          done
+          sed -i 's/#FFFFFF/#000000/I' $RES/values/ic_launcher_background.xml || true
+          cat $RES/values/ic_launcher_background.xml || true
+          ls -R $RES | head -60
       - name: Keystore
         run: |
           if [ ! -f keystore.jks ]; then
