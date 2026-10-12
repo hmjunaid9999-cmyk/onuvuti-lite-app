@@ -3,6 +3,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
+    paths-ignore:
+      - 'crash.txt'
+      - 'sha1.txt'
 permissions:
   contents: write
 jobs:
@@ -27,6 +30,10 @@ jobs:
       - run: npm install
       - run: npx cap add android
       - run: cp google-services.json android/app/google-services.json
+      - name: Enable Google sign-in in plugin
+        run: |
+          sed -i 's/^ext {/ext {\n    rgcfaIncludeGoogle = true/' android/variables.gradle
+          cat android/variables.gradle
       - name: Keystore
         run: |
           if [ ! -f keystore.jks ]; then
