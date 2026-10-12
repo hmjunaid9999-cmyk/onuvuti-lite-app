@@ -1,0 +1,60 @@
+10-12 12:24:46.424   951   951 D MediaPlayerList: Name of package changed: com.onuvuti.lite
+10-12 12:24:46.424   951   951 D MediaPlayerList: Name of package changed: com.onuvuti.lite
+10-12 12:24:46.433   554  1384 W BackupTransportManager: Package com.onuvuti.lite enabled setting: 0
+10-12 12:24:46.529  1840  1840 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+10-12 12:24:46.535  1840  1840 I AndroidRuntime: Using default boot image
+10-12 12:24:46.535  1840  1840 I AndroidRuntime: Leaving lock profiling enabled
+10-12 12:24:46.596   984   984 D CarrierSvcBindHelper: onPackageAdded: com.onuvuti.lite
+10-12 12:24:46.597   984   984 D CarrierSvcBindHelper: onPackageModified: com.onuvuti.lite
+10-12 12:24:46.651  1840  1840 D AndroidRuntime: Calling main entry com.android.commands.monkey.Monkey
+10-12 12:24:46.652  1840  1840 W Monkey  : args: [-p, com.onuvuti.lite, -c, android.intent.category.LAUNCHER, 1]
+10-12 12:24:46.652  1840  1840 W Monkey  :  arg: "com.onuvuti.lite"
+10-12 12:24:46.652  1840  1840 W Monkey  : data="com.onuvuti.lite"
+10-12 12:24:46.662   554   724 I ActivityTaskManager: START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=com.onuvuti.lite/.MainActivity} from uid 2000
+10-12 12:24:46.662  1899  1899 W FirebaseApp: Default FirebaseApp failed to initialize because no default options were found. This usually means that com.google.gms:google-services was not applied to your gradle project.
+10-12 12:24:46.662  1899  1899 I FirebaseInitProvider: FirebaseApp initialization unsuccessful
+10-12 12:24:46.686   554   724 D CoreBackPreview: Window{26a4b57 u0 Splash Screen com.onuvuti.lite}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@4fa5062, mPriority=0}
+10-12 12:24:46.693  1840  1840 I AndroidRuntime: VM exiting with result code 0.
+10-12 12:24:46.698   554   583 I ActivityManager: Start proc 1930:com.onuvuti.lite/u0a126 for next-top-activity {com.onuvuti.lite/com.onuvuti.lite.MainActivity}
+10-12 12:24:46.709  1930  1930 W om.onuvuti.lite: Unexpected CPU variant for x86: x86_64.
+10-12 12:24:46.709  1930  1930 W om.onuvuti.lite: Known variants: atom, sandybridge, silvermont, kabylake, default
+10-12 12:24:46.771  1930  1930 V GraphicsEnvironment: ANGLE Developer option for 'com.onuvuti.lite' set to: 'default'
+10-12 12:24:46.771  1930  1930 V GraphicsEnvironment: ANGLE GameManagerService for com.onuvuti.lite: false
+10-12 12:24:46.779  1930  1930 I FirebaseApp: Device unlocked: initializing all Firebase APIs for app [DEFAULT]
+10-12 12:24:46.779  1930  1930 I FirebaseInitProvider: FirebaseApp initialization successful
+10-12 12:24:46.861  1930  1961 I cr_VariationsUtils: Failed reading seed file "/data/user/0/com.onuvuti.lite/app_webview/variations_seed_new"
+10-12 12:24:46.861  1930  1961 I cr_VariationsUtils: Failed reading seed file "/data/user/0/com.onuvuti.lite/app_webview/variations_seed"
+10-12 12:24:46.866   984   984 D ImsResolver: maybeAddedImsService, packageName: com.onuvuti.lite
+10-12 12:24:46.866   984   984 D ImsResolver: maybeAddedImsService, packageName: com.onuvuti.lite
+10-12 12:24:46.998   554   583 I ActivityManager: Start proc 2020:com.android.webview:sandboxed_process0:org.chromium.content.app.SandboxedProcessService0:0/u0ai9000 for  {com.onuvuti.lite/org.chromium.content.app.SandboxedProcessService0:0}
+10-12 12:24:47.063   554  1436 D ConnectivityService: requestNetwork for uid/pid:10126/1930 activeRequest: null callbackRequest: 34 [NetworkRequest [ REQUEST id=35, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10126 RequestorUid: 10126 RequestorPkg: com.onuvuti.lite UnderlyingNetworks: Null] ]] callback flags: 0 order: 2147483647
+10-12 12:24:47.064   554   730 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=35, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10126 RequestorUid: 10126 RequestorPkg: com.onuvuti.lite UnderlyingNetworks: Null] ]
+10-12 12:24:47.064   554   730 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=35, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10126 RequestorUid: 10126 RequestorPkg: com.onuvuti.lite UnderlyingNetworks: Null] ]
+10-12 12:24:47.064   554   730 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=35, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10126 RequestorUid: 10126 RequestorPkg: com.onuvuti.lite UnderlyingNetworks: Null] ]
+10-12 12:24:47.064   554   730 D MultiInternetWifiNetworkFactory: got request NetworkRequest [ REQUEST id=35, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10126 RequestorUid: 10126 RequestorPkg: com.onuvuti.lite UnderlyingNetworks: Null] ]
+10-12 12:24:47.086  1930  1930 D Capacitor: Starting BridgeActivity
+10-12 12:24:47.097  1930  1930 D AndroidRuntime: Shutting down VM
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: FATAL EXCEPTION: main
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: Process: com.onuvuti.lite, PID: 1930
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: java.lang.NoClassDefFoundError: Failed resolution of: Lcom/google/android/gms/auth/api/signin/GoogleSignIn;
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.handlers.GoogleAuthProviderHandler.buildGoogleSignInClient(GoogleAuthProviderHandler.java:123)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.handlers.GoogleAuthProviderHandler.buildGoogleSignInClient(GoogleAuthProviderHandler.java:107)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.handlers.GoogleAuthProviderHandler.<init>(GoogleAuthProviderHandler.java:36)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.FirebaseAuthentication.initAuthProviderHandlers(FirebaseAuthentication.java:935)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.FirebaseAuthentication.<init>(FirebaseAuthentication.java:68)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at io.capawesome.capacitorjs.plugins.firebase.authentication.FirebaseAuthenticationPlugin.load(FirebaseAuthenticationPlugin.java:71)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at com.getcapacitor.PluginHandle.loadInstance(PluginHandle.java:115)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at com.getcapacitor.PluginHandle.load(PluginHandle.java:105)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at com.getcapacitor.PluginHandle.<init>(PluginHandle.java:65)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at com.getcapacitor.Bridge.registerPlugin(Bridge.java:691)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at com.getcapacitor.Bridge.registerAllPlugins(Bridge.java:647)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at com.getcapacitor.Bridge.<init>(Bridge.java:226)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at com.getcapacitor.Bridge.<init>(Unknown Source:0)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at com.getcapacitor.Bridge$Builder.create(Bridge.java:1566)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at com.getcapacitor.BridgeActivity.load(BridgeActivity.java:48)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at com.getcapacitor.BridgeActivity.onCreate(BridgeActivity.java:42)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at android.app.Activity.performCreate(Activity.java:8305)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at android.app.Activity.performCreate(Activity.java:8284)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1417)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:3626)
+10-12 12:24:47.100  1930  1930 E AndroidRuntime: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:3782)
