@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "846713879232-j4c548pdu9n1v962knppof868vi0auhc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.onuvuti.lite",
+            "certificate_hash": "d15f49ecec321a81f026862b2756636b319b622c"
+          }
+        },
+        {
           "client_id": "846713879232-s0hmrno67gg4lbb0q8mdu3mkstl11ksm.apps.googleusercontent.com",
           "client_type": 3
         }
