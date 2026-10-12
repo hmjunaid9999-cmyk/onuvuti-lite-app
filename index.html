@@ -88,7 +88,7 @@ const app=initializeApp({
     measurementId: "G-2K2L45CMWR"
   }),auth=getAuth(app),g=id=>document.getElementById(id);let booted=false;
 if(localStorage.getItem("onuLang")==="bn"){g("gsub").textContent="চালিয়ে যেতে Google দিয়ে লগইন করুন";g("gbtn").textContent="🔵 Google দিয়ে লগইন"}
-window.liteSignOut=()=>signOut(auth).then(()=>location.reload());
+window.liteSignOut=async()=>{try{await signOut(auth)}catch(e){}await nativeSignOut();location.reload()};
 /* ===== অ্যাডমিন (lite-admin.html) থেকে আসা সেটিংস: settings/lite ===== */
 const LITE_VER="1.0.0",LS=localStorage,ADMINS=["hmjunaid9999@gmail.com"];
 const cfgGet=()=>{try{return JSON.parse(LS.getItem("onuLiteCfg")||"{}")}catch(e){return{}}};
@@ -124,9 +124,11 @@ let cfgT=0;document.addEventListener("visibilitychange",()=>{if(!document.hidden
 lastCfg=JSON.stringify([cfgGet().features||{},cfgGet().defaults||{}]);
 
 applyCfg(cfgGet(),false);
-onAuthStateChanged(auth,u=>{curUser=u;if(u){g("gate").classList.remove("on");if(!booted){booted=true;window.boot()}cfgT=Date.now();loadCfg()}else{if(booted){location.reload();return}g("gate").classList.add("on")}});
+onAuthStateChanged(auth,u=>{curUser=u;if(u){g("gate").classList.remove("on");if(!booted){booted=true;window.boot()}cfgT=Date.now();loadCfg()}else{if(booted){nativeSignOut().then(()=>location.reload());return}g("gate").classList.add("on")}});
 /* Google লগইন: অ্যাপের ভেতরে নেটিভ, ব্রাউজারে আগের মতো পপআপ */
-const googleLogin=async()=>{const cap=window.Capacitor;if(cap&&cap.isNativePlatform&&cap.isNativePlatform()){const FA=(cap.Plugins&&cap.Plugins.FirebaseAuthentication)||(cap.registerPlugin&&cap.registerPlugin("FirebaseAuthentication"));if(!FA)throw new Error("native-login-unavailable");const r=await FA.signInWithGoogle();const idt=r&&r.credential&&r.credential.idToken;if(!idt)throw new Error("no-id-token");return signInWithCredential(auth,GoogleAuthProvider.credential(idt))}return signInWithPopup(auth,new GoogleAuthProvider())};
+const googleLogin=async()=>{const cap=window.Capacitor;if(cap&&cap.isNativePlatform&&cap.isNativePlatform()){const FA=(cap.Plugins&&cap.Plugins.FirebaseAuthentication)||(cap.registerPlugin&&cap.registerPlugin("FirebaseAuthentication"));if(!FA)throw new Error("native-login-unavailable");const r=await FA.signInWithGoogle();const idt=r&&r.credential&&r.credential.idToken;if(!idt)throw new Error("no-id-token");return signInWithCredential(auth,GoogleAuthProvider.credential(idt))}const p=new GoogleAuthProvider();p.setCustomParameters({prompt:"select_account"});return signInWithPopup(auth,p)};
+/* লগ আউটের সময় অ্যাপের নেটিভ Google অ্যাকাউন্টও ছাড়িয়ে দেওয়া, যাতে পরের বার অন্য Gmail বেছে নেওয়া যায় */
+async function nativeSignOut(){try{const cap=window.Capacitor;if(cap&&cap.isNativePlatform&&cap.isNativePlatform()){const FA=(cap.Plugins&&cap.Plugins.FirebaseAuthentication)||(cap.registerPlugin&&cap.registerPlugin("FirebaseAuthentication"));if(FA&&FA.signOut)await Promise.race([FA.signOut(),new Promise(r=>setTimeout(r,2500))])}}catch(e){}}
 g("gbtn").onclick=()=>googleLogin().catch(e=>{g("gerr").textContent=e.code||e.message});
 /* অ্যান্ড্রয়েড ব্যাক বাটন: খোলা মেনু/পেজ থেকে আগের পেজে ফেরা; হোমে থাকলে অ্যাপ বন্ধ */
 (()=>{const cap=window.Capacitor;if(!(cap&&cap.isNativePlatform&&cap.isNativePlatform()))return;
@@ -166,5 +168,12 @@ chk.onclick=check;
 go.onclick=e=>{e.preventDefault();location.href=apkUrl()};
 const dlb=g("dlbtn");if(dlb)dlb.addEventListener("click",check);
 setTimeout(check,4000)})();
+/* ===== লগইনের পর প্রথমবার মাইক ও ক্যামেরার অনুমতি চাওয়া (শুধু অ্যাপে) ===== */
+(()=>{const cap=window.Capacitor;if(!(cap&&cap.isNativePlatform&&cap.isNativePlatform()))return;
+if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)return;
+const ask=async c=>{try{const s=await navigator.mediaDevices.getUserMedia(c);s.getTracks().forEach(x=>x.stop())}catch(e){}};
+const iv=setInterval(async()=>{if(!curUser)return;clearInterval(iv);
+if(LS.getItem("onuPermAsked")==="1")return;LS.setItem("onuPermAsked","1");
+await ask({audio:true});await ask({video:true})},1500)})();
 </script>
 </body></html>
