@@ -76,7 +76,7 @@ tt();function boot(){var m=/^#?(index|profile|messages|notifications)(.*)$/.exec
 <div class="full" id="gate" style="z-index:100;align-items:center;justify-content:center;text-align:center;padding:24px"><div style="font-size:28px;font-weight:800;color:var(--g)">Onuvuti Lite</div><div id="gsub" style="opacity:.75;margin:10px 0 24px">Login with Google to continue</div><button class="item" id="gbtn" style="justify-content:center;max-width:340px">🔵 Continue with Google</button><div id="gerr" style="color:#e5484d;font-size:14px;margin-top:10px;max-width:340px"></div></div>
 <script type="module">
 import{initializeApp}from"https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-import{getAuth,GoogleAuthProvider,signInWithPopup,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
+import{getAuth,GoogleAuthProvider,signInWithPopup,signInWithCredential,onAuthStateChanged,signOut}from"https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 import{getFirestore,doc,getDoc}from"https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js";
 const app=initializeApp({
     apiKey: "AIzaSyBi5nb_B_ymD5dR-jGh_RMYMWLrtnHTOCA",
@@ -125,6 +125,8 @@ lastCfg=JSON.stringify([cfgGet().features||{},cfgGet().defaults||{}]);
 
 applyCfg(cfgGet(),false);
 onAuthStateChanged(auth,u=>{curUser=u;if(u){g("gate").classList.remove("on");if(!booted){booted=true;window.boot()}cfgT=Date.now();loadCfg()}else{if(booted){location.reload();return}g("gate").classList.add("on")}});
-g("gbtn").onclick=()=>signInWithPopup(auth,new GoogleAuthProvider()).catch(e=>{g("gerr").textContent=e.code||e.message});
+/* Google লগইন: অ্যাপের ভেতরে নেটিভ, ব্রাউজারে আগের মতো পপআপ */
+const googleLogin=async()=>{const cap=window.Capacitor;if(cap&&cap.isNativePlatform&&cap.isNativePlatform()){const FA=(cap.Plugins&&cap.Plugins.FirebaseAuthentication)||(cap.registerPlugin&&cap.registerPlugin("FirebaseAuthentication"));if(!FA)throw new Error("native-login-unavailable");const r=await FA.signInWithGoogle();const idt=r&&r.credential&&r.credential.idToken;if(!idt)throw new Error("no-id-token");return signInWithCredential(auth,GoogleAuthProvider.credential(idt))}return signInWithPopup(auth,new GoogleAuthProvider())};
+g("gbtn").onclick=()=>googleLogin().catch(e=>{g("gerr").textContent=e.code||e.message});
 </script>
 </body></html>
